@@ -1,11 +1,21 @@
 package com.dolphine.authentication.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "d_user_dtl_tb")
@@ -39,7 +49,7 @@ public class User {
     private String userDepartment;
     
     @Column(name = "d_user_status", nullable = false)
-    private boolean userStatus;
+    private String userStatus;
 
     @Column(name = "c_aud_add_ts", nullable = false)
     private LocalDateTime auditAddTimestamp;

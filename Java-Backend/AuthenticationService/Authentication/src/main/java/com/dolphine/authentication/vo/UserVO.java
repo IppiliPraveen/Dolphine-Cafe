@@ -31,7 +31,7 @@ public class UserVO extends BaseVO{
     
     private String userDepartment;
     
-    private boolean userStatus;
+    private String userStatus;
     
     private PhoneMailVO phoneMail;
     
