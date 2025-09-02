@@ -1,3 +1,4 @@
+
 -- Drop and create c_phone_mail_tb
 DROP TABLE IF EXISTS c_phone_mail_tb;
 CREATE TABLE c_phone_mail_tb (
@@ -46,4 +47,3 @@ CREATE TABLE d_login_tb (
         REFERENCES c_phone_mail_tb(c_email_adr)
         ON UPDATE CASCADE
         ON DELETE CASCADE
-) AUTO_INCREMENT = 10001;

@@ -1,14 +1,17 @@
 package com.dolphine.authentication.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dolphine.authentication.service.UserSignUpService;
+import com.dolphine.authentication.vo.LogInVO;
 import com.dolphine.authentication.vo.UserVO;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("dolphine/user")
 public class AuthenticationController {
@@ -22,4 +25,11 @@ public class AuthenticationController {
 		System.out.println("----------->signUp");
 		return userSignUpService.signUpUser(userVo);
 	}
+	
+	@PostMapping("/signin")
+	public boolean signIn(@RequestBody LogInVO logInVo) {
+		System.out.println("----------->signin");
+		return userSignUpService.signIn(logInVo);
+	}
+	
 }
