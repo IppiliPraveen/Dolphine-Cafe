@@ -1,5 +1,7 @@
 package com.dolphine.authentication.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dolphine.authentication.service.UserSignUpService;
 import com.dolphine.authentication.vo.LogInVO;
 import com.dolphine.authentication.vo.UserVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,9 +31,18 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/signin")
-	public boolean signIn(@RequestBody LogInVO logInVo) {
+	public Map<Object, Object> signIn(@RequestBody LogInVO logInVo) {
 		System.out.println("----------->signin");
-		return userSignUpService.signIn(logInVo);
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Map<Object, Object> resp = userSignUpService.signIn(logInVo);
+		try {
+			String res=mapper.writer().withDefaultPrettyPrinter().writeValueAsString(resp);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resp;
 	}
 	
 }
