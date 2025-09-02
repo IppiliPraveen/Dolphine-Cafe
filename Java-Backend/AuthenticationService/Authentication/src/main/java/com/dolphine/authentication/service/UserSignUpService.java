@@ -1,5 +1,7 @@
 package com.dolphine.authentication.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
@@ -66,14 +68,30 @@ public class UserSignUpService {
 		}
 	}
 
-	public boolean signIn(LogInVO logInVo) {
+	public Map<Object, Object> signIn(LogInVO logInVo) {
 		
+		Map<Object, Object> resp = new HashMap<>();
+		Map<String, String> userMap = new HashMap<>();
 		SignIn signIn = signInRepo.findByEmailId(logInVo.getEmailId());
-		boolean matches = passwordEncoder.matches(logInVo.getPassword(), signIn.getPassword());
-		if(Objects.nonNull(signIn) && matches) {
-			return true;
+		
+		if(Objects.nonNull(signIn)) {
+			boolean matches = passwordEncoder.matches(logInVo.getPassword(), signIn.getPassword());
+			if(matches) {
+				PhoneMail phoneVo = commonRepo.getByEmailId(logInVo.getEmailId());
+				User user = userRepo.getUserByCommonInd(phoneVo.getCommonDetailId());
+				
+				resp.put("result", true);
+				userMap.put("username", user.getFirstName());
+				userMap.put("email", phoneVo.getEmail());
+				resp.put("data", userMap);
+				resp.put("token", user.getUserStatus());
+				resp.put("role", user.getUserRole());
+				
+				return resp;
+			}
+			return null;
 		}
-		return false;
+		return null;
 	}
 
 }
