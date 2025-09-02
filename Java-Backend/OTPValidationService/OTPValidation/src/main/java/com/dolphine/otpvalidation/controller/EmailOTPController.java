@@ -1,6 +1,7 @@
 package com.dolphine.otpvalidation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.dolphine.otpvalidation.vo.EmailOTPRequestVO;
 import com.dolphine.otpvalidation.vo.EmailOTPValidationVO;
 import com.dolphine.otpvalidation.vo.OTPVO;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/otp/email")
 public class EmailOTPController {
