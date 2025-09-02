@@ -35,4 +35,6 @@ public class UserVO extends BaseVO{
     
     private PhoneMailVO phoneMail;
     
+    private String password;
+    
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dolphine.authentication.service.UserSignUpService;
+import com.dolphine.authentication.vo.LogInVO;
 import com.dolphine.authentication.vo.UserVO;
 
 @RestController
@@ -22,4 +23,11 @@ public class AuthenticationController {
 		System.out.println("----------->signUp");
 		return userSignUpService.signUpUser(userVo);
 	}
+	
+	@PostMapping("/signin")
+	public boolean signIn(@RequestBody LogInVO logInVo) {
+		System.out.println("----------->signin");
+		return userSignUpService.signIn(logInVo);
+	}
+	
 }
